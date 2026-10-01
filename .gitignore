@@ -2,3 +2,6 @@ node_modules/
 .terraform/
 *.tfstate*
 frontend/config.js
+infra/.terraform/
+infra/.terraform.lock.hcl
+infra/.terraform/
