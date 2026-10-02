@@ -1,0 +1,10 @@
+title = "church-welfare gitleaks config"
+
+[extend]
+useDefault = true
+
+[allowlist]
+paths = [
+  '''node_modules''',
+  '''\.terraform''',
+]
