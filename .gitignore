@@ -9,3 +9,4 @@ ble.shinfra/.terraform/
 infra/.terraform/tfstate
 infra/.terraform/backup
 backend/venv/
+node_modules/
