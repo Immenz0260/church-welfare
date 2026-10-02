@@ -33,3 +33,7 @@ output "cloudfront_domain_name" {
 output "cloudfront_distribution_id" {
   value = aws_cloudfront_distribution.frontend.id
 }
+
+output "github_deploy_role_arn" {
+  value = aws_iam_role.github_deploy.arn
+}
