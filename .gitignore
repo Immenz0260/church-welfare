@@ -5,3 +5,7 @@ frontend/config.js
 infra/.terraform/
 infra/.terraform.lock.hcl
 infra/.terraform/
+ble.shinfra/.terraform/
+infra/.terraform/tfstate
+infra/.terraform/backup
+backend/venv/
