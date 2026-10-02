@@ -13,3 +13,7 @@ output "members_table_arn" {
 output "payments_table_arn" {
   value = aws_dynamodb_table.payments.arn
 }
+
+output "lambda_role_arn" {
+  value = aws_iam_role.lambda_exec.arn
+}
