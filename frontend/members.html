@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+  <meta name="viewport" content="width=devvice-width, initial-scale=1.0">
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+   <header>
+    <div class="logo">
+      <span>🏰</span>
+       <strong>Church <br>Welfare</strong>
+    </div>
+
+    <nav class="navbar">
+      <a href="main.html" > Record <br>Payment</a>   
+      <a href="members.html" >Members  </a> 
+       <div id="themeToggle" class="moon" style="cursor: pointer;">🌙</div>
+    </nav>
+  </header>
+  
+  <main>
+    <h1>Members</h1>
+    <p>0 registered members. Click a name to view their payments history.
+   <div style="position:relative;">
+  <input type="text" id="searchInput" placeholder="🔍 Search by name..." autocomplete="off">
+  <div id="suggestions" class="suggestions"></div>
+</div>
+<div id="memberList"></div>
+  
+    <div id="memberList" class="form" style="padding: 0; overflow: hidden;"></div>
+  </main>
+  <script src="main.js"></script>
+</body>
+</html>
