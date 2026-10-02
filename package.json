@@ -1,9 +1,10 @@
 {
   "name": "church-welfare",
   "private": true,
+  "type": "module",
   "scripts": {
     "lint:html": "htmlhint 'frontend/**/*.html'",
-    "lint:js": "eslint frontend/js",
+    "lint:js": "eslint frontend/js --no-error-on-unmatched-pattern",
     "lint": "npm run lint:html && npm run lint:js"
   },
   "devDependencies": {
