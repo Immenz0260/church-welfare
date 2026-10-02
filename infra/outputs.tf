@@ -17,3 +17,7 @@ output "payments_table_arn" {
 output "lambda_role_arn" {
   value = aws_iam_role.lambda_exec.arn
 }
+
+output "api_url" {
+  value = aws_apigatewayv2_api.http_api.api_endpoint
+}
