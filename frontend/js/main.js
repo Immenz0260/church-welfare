@@ -251,7 +251,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-    // MEMBER DETAILS PAGE
+  // MEMBER DETAILS PAGE
   var detailName = document.getElementById("detailName");
   if (detailName) {
     var params = new URLSearchParams(window.location.search);
@@ -260,27 +260,32 @@ document.addEventListener("DOMContentLoaded", function () {
     if (nameParam) detailName.textContent = decodeURIComponent(nameParam);
 
     if (memberId) {
-      fetch(CONFIG.API_URL + "/members/" + encodeURIComponent(memberId) + "/payments")
-        .then(function (res) { return res.json(); })
-        .then(function (payments) {
+      Promise.all([
+        fetch(CONFIG.API_URL + "/members/" + encodeURIComponent(memberId)).then(function (res) { return res.json(); }),
+        fetch(CONFIG.API_URL + "/members/" + encodeURIComponent(memberId) + "/payments").then(function (res) { return res.json(); })
+      ])
+        .then(function (results) {
+          var member = results[0];
+          var payments = results[1];
+
+          document.getElementById("detailTotal").textContent = "GHS" + Number(member.total || 0).toFixed(2);
+          document.getElementById("detailCount").textContent = member.paymentCount || 0;
+
           var body = document.getElementById("historyBody");
           body.innerHTML = "";
-          var total = 0;
           payments.forEach(function (p) {
-            total += p.amount;
             var dateStr = new Date(p.paidAt).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
-            body.innerHTML += '<div class="row"><span>' + dateStr + '</span><span>GHS' + p.amount.toFixed(2) + '</span></div>';
+            body.innerHTML += '<div class="row"><span>' + dateStr + '</span><span>GHS' + Number(p.amount).toFixed(2) + '</span></div>';
           });
-          document.getElementById("detailTotal").textContent = "GHS" + total.toFixed(2);
-          document.getElementById("detailCount").textContent = payments.length;
-          document.getElementById("historyTotal").textContent = "GHS" + total.toFixed(2);
+          document.getElementById("historyTotal").textContent = "GHS" + Number(member.total || 0).toFixed(2);
+
           if (payments.length) {
             var firstDate = new Date(payments[payments.length - 1].paidAt).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
             document.getElementById("detailSince").textContent = "Member since " + firstDate;
           }
         })
         .catch(function (err) {
-          console.error("Failed to load payment history", err);
+          console.error("Failed to load member details", err);
         });
     }
   }
