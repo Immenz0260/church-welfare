@@ -4,7 +4,7 @@ resource "aws_apigatewayv2_api" "http_api" {
 
   cors_configuration {
     allow_origins = ["*"]   # tighten to your CloudFront domain once it exists
-    allow_methods = ["GET", "POST", "OPTIONS"]
+    allow_methods = ["GET", "POST", "DELETE", "OPTIONS"]
     allow_headers = ["content-type"]
   }
 }
@@ -46,4 +46,16 @@ resource "aws_lambda_permission" "api_gateway" {
   function_name = aws_lambda_function.api.function_name
   principal     = "apigateway.amazonaws.com"
   source_arn    = "${aws_apigatewayv2_api.http_api.execution_arn}/*/*"
+}
+
+resource "aws_apigatewayv2_route" "delete_member" {
+  api_id    = aws_apigatewayv2_api.http_api.id
+  route_key = "DELETE /members/{memberId}"
+  target    = "integrations/${aws_apigatewayv2_integration.lambda.id}"
+}
+
+resource "aws_apigatewayv2_route" "get_reports" {
+  api_id    = aws_apigatewayv2_api.http_api.id
+  route_key = "GET /reports"
+  target    = "integrations/${aws_apigatewayv2_integration.lambda.id}"
 }
