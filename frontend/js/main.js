@@ -251,7 +251,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // MEMBER DETAILS PAGE
+    // MEMBER DETAILS PAGE
   var detailName = document.getElementById("detailName");
   if (detailName) {
     var params = new URLSearchParams(window.location.search);
@@ -273,7 +273,6 @@ document.addEventListener("DOMContentLoaded", function () {
           });
           document.getElementById("detailTotal").textContent = "GHS" + total.toFixed(2);
           document.getElementById("detailCount").textContent = payments.length;
-          document.getElementById("detailAvg").textContent = "GHS" + (payments.length ? (total / payments.length).toFixed(2) : "0.00");
           document.getElementById("historyTotal").textContent = "GHS" + total.toFixed(2);
           if (payments.length) {
             var firstDate = new Date(payments[payments.length - 1].paidAt).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
