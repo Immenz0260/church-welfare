@@ -13,6 +13,8 @@ export default [
         localStorage: "readonly",
         setTimeout: "readonly",
         URLSearchParams: "readonly",
+        confirm: "readonly",
+        alert: "readonly",
       },
     },
     rules: {
