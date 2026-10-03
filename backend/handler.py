@@ -6,6 +6,7 @@ from decimal import Decimal
 
 import boto3
 from boto3.dynamodb.conditions import Key
+from boto3.dynamodb.conditions import Key, Attr
 
 ddb = boto3.resource("dynamodb")
 members_table = ddb.Table(os.environ.get("MEMBERS_TABLE", "church-welfare-members"))
@@ -47,6 +48,14 @@ def record_payment(body):
 
     member_id = data.get("memberId")
     paid_at = datetime.now(timezone.utc).isoformat()
+
+    if not member_id:
+        # No memberId given — check if a member with this exact name already exists
+        existing = members_table.scan(
+            FilterExpression=boto3.dynamodb.conditions.Attr("nameLower").eq(name.lower())
+        ).get("Items", [])
+        if existing:
+            member_id = existing[0]["memberId"]
 
     if not member_id:
         member_id = str(uuid.uuid4())
