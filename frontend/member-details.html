@@ -1,45 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Member Details - Church Welfare</title>
-<link rel="stylesheet" href="main.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Member Details - Church Welfare</title>
+  <link rel="stylesheet" href="main.css">
 </head>
 <body>
-   <header>
+  <header>
     <div class="logo">
       <span>🏰</span>
       <strong>Church <br>Welfare</strong>
     </div>
     <nav class="navbar">
-      <a href="main.html">Record <br>Payment</a>
+      <a href="index.html">Record <br>Payment</a>
       <a href="members.html">Members</a>
-     <div id="themeToggle" class="moon" style="cursor: pointer;">🌙</div>
+      <div id="themeToggle" class="moon" style="cursor: pointer;">🌙</div>
     </nav>
   </header>
 
+  <main style="max-width:600px; margin:20px auto; padding:0 15px;">
+    <a href="members.html" class="back-btn">← Back to Members</a>
 
-<main style="max-width:600px; margin:20px auto; padding:0 15px;">
-  <a href="members.html" class="back-btn">← Back to Members</a>
-  
-  <div class="detailCard">
-    <h1 id="detailName">123</h1>
-    <p class="since" id="detailSince">Member since September 28, 2026</p>
-    <div class="stats">
-      <div><small>TOTAL PAID</small><b id="detailTotal">$41.00</b></div>
-      <div><small>PAYMENTS</small><b id="detailCount">1</b></div>
-      <div><small>AVERAGE PAYMENT</small><b id="detailAvg">$41.00</b></div>
+    <div class="detailCard">
+      <h1 id="detailName">—</h1>
+      <p class="since" id="detailSince">Loading…</p>
+      <div class="stats">
+        <div><small>TOTAL PAID</small><b id="detailTotal">GHS0.00</b></div>
+        <div><small>PAYMENTS</small><b id="detailCount">0</b></div>
+        <div><small>AVERAGE PAYMENT</small><b id="detailAvg">GHS0.00</b></div>
+      </div>
     </div>
-  </div>
 
-  <h3 class="historyTitle">Payment History</h3>
-  <div class="historyTable">
-    <div class="head"><span>DATE</span><span>AMOUNT</span></div>
-    <div id="historyBody"></div>
-    <div class="foot"><span>Total</span><span id="historyTotal">$41.00</span></div>
-  </div>
-</main>
-<script src="main.js"></script>
+    <h3 class="historyTitle">Payment History</h3>
+    <div class="historyTable">
+      <div class="head"><span>DATE</span><span>AMOUNT</span></div>
+      <div id="historyBody"></div>
+      <div class="foot"><span>Total</span><span id="historyTotal">GHS0.00</span></div>
+    </div>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>

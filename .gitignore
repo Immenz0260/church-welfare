@@ -10,3 +10,5 @@ infra/.terraform/tfstate
 infra/.terraform/backup
 backend/venv/
 node_modules/
+backend/__pycache__/
+ble.sh/

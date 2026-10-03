@@ -10,6 +10,9 @@ export default [
         fetch: "readonly",
         CONFIG: "readonly",
         console: "readonly",
+        localStorage: "readonly",
+        setTimeout: "readonly",
+        URLSearchParams: "readonly",
       },
     },
     rules: {
