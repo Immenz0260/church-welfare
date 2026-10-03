@@ -43,6 +43,11 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   }
 
+  function formatDate(iso) {
+    if (!iso) return "—";
+    return new Date(iso).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+  }
+
   // RECORD PAYMENT PAGE
   var nameInput = document.getElementById("memberName");
   var amountInput = document.getElementById("amountPaid");
@@ -161,9 +166,45 @@ document.addEventListener("DOMContentLoaded", function () {
       var row = document.createElement("div");
       row.className = "memberRow";
       row.style.cursor = "pointer";
-      row.innerHTML = '<div class="left"><strong>' + m.name + '</strong></div>';
-      row.addEventListener("click", function () {
+      var total = m.total || 0;
+      var count = m.paymentCount || 0;
+      row.innerHTML =
+        '<div class="left"><strong>' + m.name + '</strong><span>Last paid: ' + formatDate(m.lastPaidAt) + '</span></div>' +
+        '<div class="right">' +
+          '<span class="badge">GHS' + Number(total).toFixed(2) + '</span>' +
+          '<small>' + count + (count === 1 ? ' pmt' : ' pmts') + '</small>' +
+          '<div class="menuWrap">' +
+            '<button class="dotsBtn">⋮</button>' +
+            '<div class="dotsMenu"><button class="deleteBtn">Delete</button></div>' +
+          '</div>' +
+        '</div>';
+      row.addEventListener("click", function (e) {
+        if (e.target.closest(".menuWrap")) return;
         window.location.href = "member-details.html?id=" + encodeURIComponent(m.memberId) + "&name=" + encodeURIComponent(m.name);
+      });
+      var dotsBtn = row.querySelector(".dotsBtn");
+      var dotsMenu = row.querySelector(".dotsMenu");
+      dotsBtn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        document.querySelectorAll(".dotsMenu").forEach(function (o) { if (o !== dotsMenu) o.classList.remove("show"); });
+        dotsMenu.classList.toggle("show");
+      });
+      row.querySelector(".deleteBtn").addEventListener("click", function (e) {
+        e.stopPropagation();
+        if (!confirm("Delete " + m.name + "? Their payment history will be kept for records.")) return;
+        fetch(CONFIG.API_URL + "/members/" + encodeURIComponent(m.memberId), { method: "DELETE" })
+          .then(function (res) {
+            if (!res.ok) throw new Error("Delete failed with status " + res.status);
+            return res.json();
+          })
+          .then(function () {
+            cachedMembers = cachedMembers.filter(function (x) { return x.memberId !== m.memberId; });
+            render(search ? search.value : "");
+          })
+          .catch(function (err) {
+            console.error(err);
+            alert("Could not delete member. Please try again.");
+          });
       });
       listDiv.appendChild(row);
     });
