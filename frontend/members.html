@@ -1,35 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <meta charset="UTF-8">
-  <meta name="viewport" content="width=devvice-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Members - Church Welfare</title>
   <link rel="stylesheet" href="main.css">
 </head>
 <body>
-   <header>
+  <header>
     <div class="logo">
       <span>🏰</span>
-       <strong>Church <br>Welfare</strong>
+      <strong>Church <br>Welfare</strong>
     </div>
-
     <nav class="navbar">
-      <a href="main.html" > Record <br>Payment</a>   
-      <a href="members.html" >Members  </a> 
-       <div id="themeToggle" class="moon" style="cursor: pointer;">🌙</div>
+      <a href="index.html">Record <br>Payment</a>
+      <a href="members.html">Members</a>
+      <div id="themeToggle" class="moon" style="cursor: pointer;">🌙</div>
     </nav>
   </header>
-  
+
   <main>
     <h1>Members</h1>
-    <p>0 registered members. Click a name to view their payments history.
-   <div style="position:relative;">
-  <input type="text" id="searchInput" placeholder="🔍 Search by name..." autocomplete="off">
-  <div id="suggestions" class="suggestions"></div>
-</div>
+    <p>0 registered members. Click a name to view their payment history.</p>
 
-  
-    <div id="memberListContainer" class="form" ></div>
+    <div style="position:relative;">
+      <input type="text" id="searchInput" placeholder="🔍 Search by name..." autocomplete="off">
+      <div id="suggestions" class="suggestions"></div>
+    </div>
+
+    <div id="memberListContainer" class="form"></div>
   </main>
-  <script src="main.js"></script>
+
+  <script src="config.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
