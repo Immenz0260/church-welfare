@@ -87,6 +87,7 @@ main h1{
   border-radius: 5px;
   border: 1px solid #e8e2d6;
   font-size: 14px;
+  width: 95%;
   outline: none;
 }
 .form input:focus{
