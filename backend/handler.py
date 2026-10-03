@@ -99,6 +99,12 @@ def get_history(member_id):
     )
     return respond(200, result.get("Items", []))
 
+def get_member(member_id):
+    result = members_table.get_item(Key={"memberId": member_id})
+    member = result.get("Item")
+    if not member:
+        return respond(404, {"error": "member not found"})
+    return respond(200, member)
 
 def delete_member(member_id):
     result = members_table.get_item(Key={"memberId": member_id})
@@ -158,6 +164,12 @@ def handler(event, context):
 
     if route == "POST /payments":
         return record_payment(event.get("body"))
+
+    if route == "GET /members/{memberId}":
+        member_id = event.get("pathParameters", {}).get("memberId")
+        if not member_id:
+            return respond(400, {"error": "memberId is required"})
+        return get_member(member_id)
 
     if route == "GET /members/{memberId}/payments":
         member_id = event.get("pathParameters", {}).get("memberId")

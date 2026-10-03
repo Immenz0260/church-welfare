@@ -59,3 +59,9 @@ resource "aws_apigatewayv2_route" "get_reports" {
   route_key = "GET /reports"
   target    = "integrations/${aws_apigatewayv2_integration.lambda.id}"
 }
+
+resource "aws_apigatewayv2_route" "get_member" {
+  api_id    = aws_apigatewayv2_api.http_api.id
+  route_key = "GET /members/{memberId}"
+  target    = "integrations/${aws_apigatewayv2_integration.lambda.id}"
+}
