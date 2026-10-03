@@ -25,3 +25,14 @@ resource "aws_dynamodb_table" "payments" {
     type = "S"
   }
 }
+
+resource "aws_dynamodb_table" "deleted_members" {
+  name         = "${var.project_name}-deleted-members"
+  billing_mode = "PAY_PER_REQUEST"
+  hash_key     = "memberId"
+
+  attribute {
+    name = "memberId"
+    type = "S"
+  }
+}

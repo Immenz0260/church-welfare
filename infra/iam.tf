@@ -25,12 +25,16 @@ resource "aws_iam_role_policy" "lambda_dynamodb" {
         Action = [
           "dynamodb:GetItem",
           "dynamodb:PutItem",
+          "dynamodb:UpdateItem",
+          "dynamodb:DeleteItem",
           "dynamodb:Query",
-          "dynamodb:Scan"
+          "dynamodb:Scan",
+          "dynamodb:BatchWriteItem"
         ]
         Resource = [
           aws_dynamodb_table.members.arn,
-          aws_dynamodb_table.payments.arn
+          aws_dynamodb_table.payments.arn,
+          aws_dynamodb_table.deleted_members.arn
         ]
       }
     ]
